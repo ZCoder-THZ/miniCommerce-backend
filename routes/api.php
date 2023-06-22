@@ -24,5 +24,6 @@ Route::post('/v1/products/search',[ItemController::class,'searchItems']);
 Route::get('/v1/detail/{id}', [ItemController::class, 'getItemDetail']);
 Route::get('/v1/categories/{id}', [ItemController::class, 'getItemsByCategory']);
 Route::post('/v1/products/filter', [ItemController::class, 'filterProducts']);
+Route::get('/products/{id}/views', [ItemController::class,'updateViews']);
 
 

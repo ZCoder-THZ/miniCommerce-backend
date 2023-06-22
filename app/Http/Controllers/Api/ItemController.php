@@ -66,7 +66,9 @@ class ItemController extends Controller
     ->select('users.name as username','items.*')
     ->get()
     ->toArray();
-                            $modifiedData = array_map(function ($product) {
+
+    Item::where('items.id',$id)->first()->increment('view_count');
+    $modifiedData = array_map(function ($product) {
     if (!str_starts_with($product['image'], 'http')) {
         $product['image'] = asset('storage/' . $product['image']);
     }
@@ -116,7 +118,7 @@ class ItemController extends Controller
         $query = Item::query();
 
     if ($request->has('item_name')) {
-        $query->where('item_name', $request->input('item_name'));
+           $query->where('item_name','like','%'.$request->input('item_name').'%');
     }
 
     if ($request->has('price_min')) {
@@ -158,7 +160,7 @@ class ItemController extends Controller
  public function searchItems(Request $request)
 {
     if ($request->has('product_name')) {
-        $query = Item::query()->where('item_name', $request->input('product_name'));
+        $query = Item::query()->where('item_name','like','%'.$request->input('product_name').'%');
         $filteredItems = $query->get()->toArray();
 
         // $filteredItems=$filteredItems->toArray();
@@ -197,6 +199,11 @@ class ItemController extends Controller
             "message" => "No search criteria provided"
         ]);
     }
-}
+    }
+    // update view count
+    public function updateViews($id){
+        logger($id);
+    }
+
 
 }

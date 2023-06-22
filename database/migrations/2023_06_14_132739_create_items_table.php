@@ -25,6 +25,8 @@ return new class extends Migration
             $table->enum('status', ['avaliable', 'unavaliable'])->default('avaliable');
             $table->string('image');
             $table->unsignedBigInteger('phone');
+
+            $table->unsignedBigInteger('view_count')->default(1);
             $table->string('address');
             $table->double('ltd');
             $table->double('lng');

@@ -30,6 +30,7 @@ class ItemFactory extends Factory
                'ltd' => $faker->latitude,
               'lng' => $faker->longitude,
             'phone' => $faker->numerify('##########'), // Assuming 10-digit phone numbers
+            'view_count'=>$faker->numberBetween(1,1),
             'address' => $faker->address,
 
         ];
