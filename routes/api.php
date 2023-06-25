@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\ItemController;
 
 
@@ -25,5 +26,5 @@ Route::get('/v1/detail/{id}', [ItemController::class, 'getItemDetail']);
 Route::get('/v1/categories/{id}', [ItemController::class, 'getItemsByCategory']);
 Route::post('/v1/products/filter', [ItemController::class, 'filterProducts']);
 Route::get('/products/{id}/views', [ItemController::class,'updateViews']);
-
+Route::get('/v1/users/{id}',[UserController::class,'getUserDetail']);
 

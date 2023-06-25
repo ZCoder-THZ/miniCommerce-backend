@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 
@@ -41,6 +42,11 @@ Route::middleware([
         Route::get('/deleteItem/{id}',[ItemController::class,'deleteItem'])->name('deleteItem');
         Route::get('/editPage/{id}',[ItemController::class,'editPage'])->name('editPage');
         Route::post('/{id}/edit',[ItemController::class,'editItem'])->name('editItem');
+
+
+    });
+    Route::prefix('profile')->group(function (){
+      Route::get('/detail',[ProfileController::class,'getProfile'])->name('getProfile');
     });
 });
 Route::prefix('categories')->group(function(){
