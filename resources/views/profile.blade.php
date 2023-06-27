@@ -2,16 +2,17 @@
 @section('content')
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg ">
-            <div class="flex space-x-3  w-[100%]  md:w-3/4  justify-center mx-auto flex-col md:flex-row lg:flex-row  ">
+            <div
+                class="flex space-x-3  w-[100%]  md:w-3/4  justify-center mx-auto items-center md:items-start lg:items-start space-y-3 md:space-y-0 lg:space-y-0 flex-col sm:flex-col md:flex-row lg:flex-row  ">
 
-                <div class="p-4 border-2 border-dashed border-gray-400 w-1/4 h-50">
+                <div class="p-4 border-2 border-dashed border-gray-400 w-[50%]  lg:w-1/4 md:w-1/4  h-50">
 
                     @if (Auth::user()->profile_photo_path)
-                        <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" class="w-40 mx-auto"
-                            alt="">
+                        <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                            class="w-full md:w-40 lg:w-50 mx-auto" alt="">
                     @else
                         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
-                            class="w-40 mx-auto" alt="">
+                            class="w-full md:w-40 lg:w-50 mx-auto" alt="">
                     @endif
 
                 </div>
