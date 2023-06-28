@@ -180,5 +180,15 @@ public function getItemLimit(Request $request)
     }
     // edit page
 
+    // update status
+        public function updateStatus(Request $request, $id)
+    {
+       $item = Item::find($id);
+        if($item){
+
+           $item->status=$request->status;
+           $item->save();
+        }
+    }
 
 }

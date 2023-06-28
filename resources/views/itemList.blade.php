@@ -101,15 +101,15 @@
                                     </td>
                                     <td class="px-6 py-4">
 
-                                        <div class="" style="width: 200px">
+                                        <div class="checkbox-container" style="width: 200px">
                                             <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" id="status" value="" class="sr-only peer">
+                                                <input type="checkbox" @if ($item->status === 'avail') checked @endif
+                                                    value="{{ $item->id }}" class="sr-only peer status">
 
                                                 <div
                                                     class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
                                                 </div>
-                                                <span class="ml-3 text-sm font-medium text-gray-900 ">Toggle
-                                                    me</span>
+
                                             </label>
 
                                         </div>
@@ -135,38 +135,55 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(() => {
-                    $('#limit').on('change', function() {
-                        let limit = $(this).val();
-                        return new Promise((resolve, reject) => {
-                            $.ajax({
-                                type: 'get',
-                                url: '/items/itemList/limit',
-                                data: {
-                                    "limit": limit
-                                },
-                                success: function(data) {
-                                    // Handle the success response
-                                    $('#items-table').html(data.data);
-                                    $('#pagination-links').html(data.links);
-                                    resolve(data);
-                                    console.log(data)
-                                },
-                                error: function(err) {
-                                    // Handle the error response
-                                    reject(err);
-                                }
-                            });
-                        });
-                    });
 
-                    $('#status').change(function() {
-                        if ($(this).is(':checked')) {
-                            console.log('Checkbox is checked');
-                            // Perform actions when checkbox is checked
-                        } else {
-                            console.log('Checkbox is unchecked');
-                            // Perform actions when checkbox is unchecked
+            $('#limit').on('change', function() {
+                let limit = $(this).val();
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        type: 'get',
+                        url: '/items/itemList/limit',
+                        data: {
+                            "limit": limit
+                        },
+                        success: function(data) {
+                            // Handle the success response
+                            $('#items-table').html(data.data);
+                            $('#pagination-links').html(data.links);
+                            resolve(data);
+                            console.log(data)
+                        },
+                        error: function(err) {
+                            // Handle the error response
+                            reject(err);
                         }
                     });
+                });
+            });
+            //
+            $('.status').change(function() {
+                var itemId = Number($(this).val());
+                var status = $(this).is(':checked') ? 'avail' : 'unavail';
+
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajax({
+                    // url: '/items/' + itemId + '/status',
+                    url: `/items/${itemId}/status`,
+                    type: 'PUT',
+                    data: {
+                        status: status,
+                        _token: csrfToken
+                    },
+                    success: function(response) {
+                        console.log(response.message); // Display the success message
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText); // Display the error message
+                    }
+                });
+
+            });
+
+        })
     </script>
 @endsection

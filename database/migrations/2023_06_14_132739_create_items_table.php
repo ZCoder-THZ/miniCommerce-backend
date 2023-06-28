@@ -22,7 +22,7 @@ return new class extends Migration
             $table->longText('description');
             $table->enum('item_condition',['second','used','new']);
             $table->enum('item_type',['sell','buy','exchanged']);
-            $table->enum('status', ['avaliable', 'unavaliable'])->default('avaliable');
+               $table->enum('status', ['avail', 'unavail'])->default('avail');
             $table->string('image');
             $table->unsignedBigInteger('phone');
 

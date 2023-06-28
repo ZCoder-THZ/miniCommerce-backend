@@ -47,9 +47,10 @@ Route::middleware([
     });
     Route::prefix('profile')->group(function (){
       Route::get('/detail',[ProfileController::class,'getProfile'])->name('getProfile');
+      Route::post('/detail',[ProfileController::class ,'updateProfile'])->name('updateProfile');
     });
-});
-Route::prefix('categories')->group(function(){
+
+    Route::prefix('categories')->group(function(){
     Route::get('/categoryList',[CategoryController::class,'getCategoryList'])->name('category#getCategoryList');
     Route::get('/createPage',[CategoryController::class,'createPage'])->name('category#createPage');
     Route::post('/create',[CategoryController::class,'createCategory'])->name('category#create');
@@ -58,3 +59,7 @@ Route::prefix('categories')->group(function(){
     Route::post('/{id}/edit',[CategoryController::class,'editCategory'])->name('category#edit');
 
 });
+
+});
+
+Route::put('/items/{id}/status', [ItemController::class,'updateStatus'])->name('items.updateStatus');

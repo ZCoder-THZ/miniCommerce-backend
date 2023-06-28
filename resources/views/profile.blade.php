@@ -20,38 +20,42 @@
                     <h3 class="text-gray-400 text-2xl">Profile Info</h3>
                     <div class="h-1 w-1/4 bg-gray-400 my-3"></div>
 
-                    <form action="" enctype="multipart/form-data">
+                    <form action="{{ route('updateProfile') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="mb-6">
                             <label for="default-input"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                            <input type="file" id="default-input"
+                            <input type="file" id="default-input" name="profileImage"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full    ">
+                            @if ($errors->has('profileImage'))
+                                <h1 class="text-red-400">{{ $errors->first('profileImage') }}</h1>
+                            @endif
                         </div>
                         <div class="mb-6">
                             <label for="default-input"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default input</label>
-                            <input type="text" id="default-input" value="{{ Auth::user()->name }}"
+                            <input type="text" id="default-input" value="{{ Auth::user()->name }}" name="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   ">
                         </div>
                         <div class="mb-6">
                             <label for="small-input"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Small
                                 input</label>
-                            <input type="text" id="small-input" value="{{ AUth::user()->email }}"
+                            <input type="text" id="small-input" value="{{ AUth::user()->email }}" name="email"
                                 class="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500   ">
                         </div>
                         <div class="mb-6">
                             <label for="small-input"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
-                            <input type="text" id="small-input" value="{{ AUth::user()->phone }}"
-                                class="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500   ">
+                            <input type="text" id="small-input" value="{{ AUth::user()->phone }} " name="phone"
+                                class="block w-full p-3 text-gray-900 border border-gray-300  rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500   ">
                         </div>
 
                         <div class="mb-6">
                             <label for="large-input"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Large
                                 input</label>
-                            <input type="text" id="large-input" value="{{ AUth::user()->address }}"
+                            <input type="text" id="large-input" value="{{ AUth::user()->address }}" name="address"
                                 class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500   ">
                         </div>
                         <div class="flex justify-end ">

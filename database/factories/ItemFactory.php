@@ -25,7 +25,9 @@ class ItemFactory extends Factory
             'description' => $faker->paragraph,
             'item_condition' => $faker->randomElement(['second', 'used', 'new']),
             'item_type' => $faker->randomElement(['sell', 'buy', 'exchanged']),
-            'status' => $faker->randomElement(['avaliable', 'unavaliable']),
+
+
+            'status' => $faker->randomElement(['avail', 'unavail']),
             'image' => $faker->imageUrl(),
                'ltd' => $faker->latitude,
               'lng' => $faker->longitude,
