@@ -27,9 +27,9 @@ function updateProfile(Request $request)
 
     if (Auth::user()) {
         if ($request->file('profileImage')) {
-            if (Auth::user()->profile_photo_path) {
+            if (Auth::user()->profile_image) {
                 $oldImage = User::where('id', Auth::user()->id)->first();
-                Storage::delete('public/' . $oldImage->profile_photo_path);
+                Storage::delete('public/' . $oldImage->profile_image);
             }
 
             $validator = Validator::make($request->all(), [
@@ -48,7 +48,7 @@ function updateProfile(Request $request)
 
             $imageName = uniqid() . '_' . $request->file('profileImage')->getClientOriginalName();
             $request->file('profileImage')->storeAs('public',$imageName);
-            $data['profile_photo_path']=$imageName;
+            $data['profile_image']=$imageName;
 
         }
         User::where('id',Auth::user()->id)->update($data);

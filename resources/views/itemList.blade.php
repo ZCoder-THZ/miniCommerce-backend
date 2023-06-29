@@ -70,12 +70,18 @@
                         <tbody>
                             @foreach ($items as $item)
                                 <tr class="bg-white border-b  ">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                        <a href="{{ route('deleteItem', $item->id) }}"><i
-                                                class="fa-solid fa-2x text-white bg-red-400 rounded-lg p-1 fa-trash-can"></i></a>
-                                        <a href="{{ route('editPage', $item->id) }}"><i
-                                                class="fa-solid fa-pencil fa-2x p-1 rounded-lg text-white bg-green-400"></i></a>
-                                    </th>
+                                    @if (Auth::user()->id !== $item->user_id)
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+
+                                        </th>
+                                    @else
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                            <a href="{{ route('deleteItem', $item->id) }}"><i
+                                                    class="fa-solid fa-2x text-white bg-red-400 rounded-lg p-1 fa-trash-can"></i></a>
+                                            <a href="{{ route('editPage', $item->id) }}"><i
+                                                    class="fa-solid fa-pencil fa-2x p-1 rounded-lg text-white bg-green-400"></i></a>
+                                        </th>
+                                    @endif
                                     <td class="px-6 py-4">
                                         {{ $item->id }}
                                     </td>
@@ -102,8 +108,13 @@
                                     <td class="px-6 py-4">
 
                                         <div class="checkbox-container" style="width: 200px">
+
+                                            @if (Auth::user()->id !== $item->user_id)
+                                                <span class="text-red-500">U can't modify</span>
+                                            @endif
                                             <label class="relative inline-flex items-center cursor-pointer">
                                                 <input type="checkbox" @if ($item->status === 'avail') checked @endif
+                                                    @if (Auth::user()->id !== $item->user_id) @disabled(true) @endif
                                                     value="{{ $item->id }}" class="sr-only peer status">
 
                                                 <div

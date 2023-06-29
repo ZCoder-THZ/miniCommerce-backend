@@ -28,4 +28,3 @@ Route::post('/v1/products/filter', [ItemController::class, 'filterProducts']);
 Route::get('/products/{id}/views', [ItemController::class,'updateViews']);
 Route::get('/v1/users/{id}',[UserController::class,'getUserDetail']);
 
-Route::put('/items/{id}/status', [ItemController::class,'updateStatus'])->name('items.updateStatus');

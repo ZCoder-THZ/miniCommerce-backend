@@ -7,8 +7,8 @@
 
                 <div class="p-4 border-2 border-dashed border-gray-400 w-[50%]  lg:w-1/4 md:w-1/4  h-50">
 
-                    @if (Auth::user()->profile_photo_path)
-                        <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                    @if (Auth::user()->profile_image)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_image) }}"
                             class="w-full md:w-40 lg:w-50 mx-auto" alt="">
                     @else
                         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"

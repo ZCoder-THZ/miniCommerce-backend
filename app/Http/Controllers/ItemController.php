@@ -44,7 +44,7 @@ class ItemController extends Controller
     'description' => 'required|string',
     'itemCondition' => 'required|in:second,used,new',
     'itemType' => 'required|in:sell,buy,exchanged',
-    'status' => 'required|in:avaliable,unavaliable',
+    // 'status' => 'required|in:avail,unavail',
 //    'image' => 'required|image|mimes:jpeg,png',
     'uploader' => 'required|string',
 
@@ -62,7 +62,8 @@ class ItemController extends Controller
     'description' => $request->input('description'),
     'item_condition' => $request->input('itemCondition'),
     'item_type' => $request->input('itemType'),
-    'status' => $request->input('status'),
+     'status' => $request->input('status') ?? 'unavail',
+
 
     'uploader' => $request->input('uploader'),
     'phone' => $request->input('phone'),
@@ -71,6 +72,7 @@ class ItemController extends Controller
     'ltd' => $request->input('ltd'),
     'lng' => $request->input('lng')
 ];
+    // dd($data);
           $imageName=uniqid().'_'.$request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('public/',$imageName);
             $data['image']=$imageName;
@@ -148,7 +150,7 @@ public function getItemLimit(Request $request)
     'description' => $request->input('description'),
     'item_condition' => $request->input('itemCondition'),
     'item_type' => $request->input('itemType'),
-    'status' => $request->input('status'),
+    'status' => $request->input('status') ?? 'unavail',
 
     'uploader' => $request->input('uploader'),
     'phone' => $request->input('phone'),
@@ -173,7 +175,7 @@ public function getItemLimit(Request $request)
             $request->file('image')->storeAs('public',$fileName);
             $data['image']=$fileName;
         }
-
+   
         Item::where('id',$id)->update($data);
         return redirect()->route('itemList');
 

@@ -65,8 +65,8 @@
                     <div class="flex justify-center items-center space-x-3 cursor-pointer">
                         <div class="w-12 h-12 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
 
-                            @if (Auth::user()->profile_photo_path)
-                                <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                            @if (Auth::user()->profile_image)
+                                <img src="{{ asset('storage/' . Auth::user()->profile_image) }}"
                                     class="w-full h-full object-cover" alt="">
                             @else
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"

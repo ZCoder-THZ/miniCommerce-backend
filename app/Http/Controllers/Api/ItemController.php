@@ -18,7 +18,7 @@ class ItemController extends Controller
 
         // Example: Access an undefined variable to trigger an exception
 
-        $items=Item::join('categories','categories.id','=','category_id')->join('users','users.id','user_id')->select('items.*','categories.category_name','categories.id as categoryId','categories.category_image','users.name')->get()->toArray();
+        $items=Item::join('categories','categories.id','=','category_id')->join('users','users.id','user_id',)->select('items.*','categories.category_name','categories.id as categoryId','categories.category_image','users.name','users.profile_image') ->where('items.status', 'avail')->get()->toArray();
         // dd($items);
         $categories=Category::get()->toArray();
             $modifiedCategories = array_map(function ($category) {
@@ -27,11 +27,14 @@ class ItemController extends Controller
               $category['category_image'] = asset('storage/' . $category['category_image']);
               }
     return $category;
-}, $categories);
+        }, $categories);
 
 
 
         $modifiedData = array_map(function ($product) {
+     if ($product['profile_image'] !== null && !str_starts_with($product['profile_image'], 'http')) {
+        $product['profile_image'] = asset('storage/' . $product['profile_image']);
+    }
     if (!str_starts_with($product['image'], 'http')) {
         $product['image'] = asset('storage/' . $product['image']);
     }
@@ -46,13 +49,14 @@ class ItemController extends Controller
         logger($modifiedData);
         return response()->json([
                 "data"=>$modifiedData,
+                "items"=>$items,
                 "category"=>$modifiedCategories
         ],200);
     } catch (\Exception $e) {
         // Exception handling
 
         // Example: Log the exception
-        \Log::error($e->getMessage());
+        // Log::error($e->getMessage());
 
         // Example: Return a response for the error
         return response()->json(['message' => 'An error occurred'], 500);

@@ -101,8 +101,8 @@
                         </div>
                         <div class="mb-3 p-4">
                             <div class="flex items-center mb-4">
-                                <input id="default-checkbox" type="checkbox" onchange="updateValue(this)" name="status"
-                                    value="avaliable"
+                                <input id="default-checkbox" type="checkbox" name="status"
+                                    value="avail"
                                     class="w-4 h-4 text-blue-600 p-3 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2">
 
                                 <label for="default-checkbox"
@@ -175,7 +175,7 @@
                             @enderror
 
                         </div>
-                        <input type="number" name="user_id" value="1" hidden>
+                        <input type="number" name="user_id" value="{{Auth::user()->id}}" hidden>
                         <div class="mb-3 p-4">
                             <input type="text" class="hidden" name="ltd" id="ltd">
                             <input type="text" class="hidden" name="lng" id="lng">
